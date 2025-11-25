@@ -1,0 +1,37 @@
+{
+  "name": "engine",
+  "description": "",
+  "scripts": {
+    "postinstall": "motia install",
+    "dev": "motia dev",
+    "generate-types": "motia generate-types",
+    "build": "motia build",
+    "clean": "rm -rf dist node_modules python_modules .motia .mermaid"
+  },
+  "keywords": [
+    "motia"
+  ],
+  "dependencies": {
+    "@motiadev/adapter-redis-state": "^0.11.2-beta.156",
+    "@motiadev/core": "^0.11.1-beta.155",
+    "@motiadev/plugin-endpoint": "^0.11.1-beta.155",
+    "@motiadev/plugin-logs": "^0.11.1-beta.155",
+    "@motiadev/plugin-observability": "^0.11.1-beta.155",
+    "@motiadev/plugin-states": "^0.11.1-beta.155",
+    "@prisma/adapter-mariadb": "^7.0.0",
+    "@prisma/client": "^7.0.0",
+    "bcrypt": "^6.0.0",
+    "motia": "^0.11.1-beta.155",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.1",
+    "prisma": "^7.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./generated/client": "./prisma/generated/*"
+  }
+}
