@@ -1,15 +1,13 @@
 import type { ApiMiddleware } from 'motia';
 import jwt from 'jsonwebtoken';
 
-// Extend the Request object to include the user property
-declare module 'motia' {
-    interface Request {
-        user?: { id: string; email: string };
-    }
-}
-
 export const authMiddleware: ApiMiddleware = async (req, ctx, next) => {
-    const authHeader = req.headers?.authorization;
+    let authHeader = req.headers?.authorization;
+
+    // Handle potential string[] type for headers
+    if (Array.isArray(authHeader)) {
+        authHeader = authHeader[0]; // Take the first header if multiple are present
+    }
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
         return {
@@ -31,6 +29,15 @@ export const authMiddleware: ApiMiddleware = async (req, ctx, next) => {
 
     try {
         const decoded = jwt.verify(token, secret);
+
+        if (typeof decoded === 'string') {
+            ctx.logger.error('JWT verification failed: Invalid token payload type.');
+            return {
+                status: 401,
+                body: { error: 'Unauthorized: Invalid token' },
+            };
+        }
+
         req.user = decoded as { id: string; email: string };
         return await next();
     } catch (error) {
