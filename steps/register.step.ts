@@ -1,9 +1,11 @@
 import type { ApiRouteConfig, Handlers } from 'motia';
 import { z } from 'zod';
+import db from '../db/connection';
+import bcrypt from 'bcrypt';
+import { createId } from '@paralleldrive/cuid2';
 
 const registerSchema = z.object({
-    name: z.string().min(1, 'Name is required').max(255, 'Name must be less than 255 characters'),
-    email: z.email('Invalid email address').min(1, 'Email is required').max(255, 'Email must be less than 255 characters'),
+    email: z.string().email('Invalid email address').min(1, 'Email is required').max(255, 'Email must be less than 255 characters'),
     password: z.string().min(8, 'Password must be at least 8 characters long'),
 })
 
@@ -11,25 +13,30 @@ export const config: ApiRouteConfig = {
     name: 'Register',
     type: 'api',
     description: 'Handles user register requests.',
-    path: '/register',
+    path: '/api/auth/register',
     method: 'POST',
     bodySchema: registerSchema,
-    emits: ['UserRegistered'],
 }
 
-export const handler: Handlers['Register'] = async (req, { emit, logger }) => {
-    // Validate the incoming data against the schema
-    const parsedData = registerSchema.safeParse(req.body);
+export const handler: Handlers['Register'] = async (req, { logger }) => {
+    const { email, password } = registerSchema.parse(req.body);
 
-    if (!parsedData.success) {
-        logger.error('register validation failed', parsedData.error);
-        throw new Error('Invalid register data');
+    const existingUser = await db('users').where({ email }).first();
+
+    if (existingUser) {
+        throw new Error('User with this email already exists.');
     }
 
-    // Emit an event indicating the user has logged in
-    emit('UserRegistered', { user: parsedData.data });
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const id = createId();
 
-    logger.info(`User ${parsedData.data.email} registered successfully.`);
+    await db('users').insert({
+        id,
+        email,
+        password: hashedPassword,
+    });
 
-    return { success: true, user: parsedData.data };
+    logger.info(`User ${email} registered successfully.`);
+
+    return { success: true, user: { id, email } };
 }

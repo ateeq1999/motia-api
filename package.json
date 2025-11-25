@@ -12,21 +12,23 @@
     "motia"
   ],
   "dependencies": {
+    "@fastify/jwt": "^10.0.0",
     "@motiadev/adapter-redis-state": "^0.11.2-beta.156",
     "@motiadev/core": "^0.11.1-beta.155",
     "@motiadev/plugin-endpoint": "^0.11.1-beta.155",
     "@motiadev/plugin-logs": "^0.11.1-beta.155",
     "@motiadev/plugin-observability": "^0.11.1-beta.155",
     "@motiadev/plugin-states": "^0.11.1-beta.155",
-    "@prisma/adapter-mariadb": "^7.0.0",
-    "@prisma/client": "^7.0.0",
+    "@paralleldrive/cuid2": "^3.0.4",
     "bcrypt": "^6.0.0",
+    "knex": "^3.1.0",
     "motia": "^0.11.1-beta.155",
+    "pg": "^8.16.3",
     "zod": "^4.1.12"
   },
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
     "@types/react": "^19.1.1",
-    "prisma": "^7.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
   },

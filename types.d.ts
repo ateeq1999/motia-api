@@ -12,7 +12,6 @@ declare module 'motia' {
   }
 
   interface Handlers {
-    'Register': ApiRouteHandler<{ name: string; email: string; password: string }, unknown, never>
-    'Login': ApiRouteHandler<{ email: string; password: string }, unknown, never>
+    
   }
 }
