@@ -1,5 +1,6 @@
 import type { ApiRouteConfig, Handlers } from 'motia';
 import db from '../db/connection';
+import { authMiddleware } from '../middlewares/auth.middleware';
 
 export const config: ApiRouteConfig = {
     name: 'Me',
@@ -7,7 +8,8 @@ export const config: ApiRouteConfig = {
     description: 'Fetches the currently authenticated user.',
     path: '/api/auth/me',
     method: 'GET',
-    authenticate: true, // This flag will be used to protect the route
+    middleware: [authMiddleware],
+    emits: [],
 }
 
 export const handler: Handlers['Me'] = async (req, { logger }) => {

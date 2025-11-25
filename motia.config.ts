@@ -1,6 +1,5 @@
 import { RedisStateAdapter } from '@motiadev/adapter-redis-state';
 import { config } from '@motiadev/core';
-import { setupAuth } from './server';
 
 const statesPlugin = require('@motiadev/plugin-states/plugin');
 const endpointPlugin = require('@motiadev/plugin-endpoint/plugin');
@@ -15,20 +14,4 @@ export default config({
       port: parseInt(process.env.REDIS_PORT || '6379'),
     }),
   },
-  hooks: {
-    server: (app) => {
-      setupAuth(app);
-    },
-    endpoint: {
-      before: (endpoint, app) => {
-        if (endpoint.config.authenticate) {
-          endpoint.options = {
-            ...endpoint.options,
-            preHandler: [app.authenticate],
-          };
-        }
-        return endpoint;
-      }
-    }
-  }
 });

@@ -16,6 +16,7 @@ export const config: ApiRouteConfig = {
     path: '/api/auth/register',
     method: 'POST',
     bodySchema: registerSchema,
+    emits: [],
 }
 
 export const handler: Handlers['Register'] = async (req, { logger }) => {
