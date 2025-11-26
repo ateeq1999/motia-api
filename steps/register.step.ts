@@ -39,5 +39,5 @@ export const handler: Handlers['Register'] = async (req, { logger }) => {
 
     logger.info(`User ${email} registered successfully.`);
 
-    return { success: true, user: { id, email } };
+    return { status: 201, body: { user: { id, email } } };
 }

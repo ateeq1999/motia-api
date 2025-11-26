@@ -33,8 +33,9 @@ export const handler: Handlers['Login'] = async (req, { logger }) => {
     if (!isPasswordValid) {
         throw new Error('Invalid email or password.');
     }
-    
+
     const secret = process.env.JWT_SECRET;
+
     if (!secret) {
         logger.error('JWT_SECRET is not defined in environment variables.');
         throw new Error('Internal Server Error: JWT secret is not configured.');
@@ -48,5 +49,5 @@ export const handler: Handlers['Login'] = async (req, { logger }) => {
 
     logger.info(`User ${email} logged in successfully.`);
 
-    return { success: true, token };
+    return { status: 201, body: { token } };
 }

@@ -7,10 +7,6 @@
 import { EventHandler, ApiRouteHandler, ApiResponse, MotiaStream, CronHandler } from 'motia'
 
 declare module 'motia' {
-  interface ApiRequest<T> {
-    user?: { id: string; email: string };
-  }
-
   interface FlowContextStateStreams {
     
   }
@@ -19,5 +15,6 @@ declare module 'motia' {
     'Register': ApiRouteHandler<{ email: string; password: string }, unknown, never>
     'Me': ApiRouteHandler<Record<string, unknown>, unknown, never>
     'Login': ApiRouteHandler<{ email: string; password: string }, unknown, never>
+    'Ping': ApiRouteHandler<{ name: string }, unknown, never>
   }
 }

@@ -14,7 +14,7 @@ export const config: ApiRouteConfig = {
 
 export const handler: Handlers['Me'] = async (req, { logger }) => {
     // The user object is attached to the request by the authentication hook
-    const userId = req.user.id;
+    const userId = `${req.user.id}`;
 
     const user = await db('users').where({ id: userId }).first();
 
@@ -25,5 +25,6 @@ export const handler: Handlers['Me'] = async (req, { logger }) => {
     logger.info(`Fetched data for user ${user.email}.`);
 
     const { password, ...userWithoutPassword } = user;
-    return { success: true, user: userWithoutPassword };
+
+    return { status: 201, body: { user: userWithoutPassword } };
 }
