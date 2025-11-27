@@ -38,7 +38,7 @@ export const authMiddleware: ApiMiddleware = async (req, ctx, next) => {
             };
         }
 
-        req.user = decoded as { id: string; email: string };
+        (req as any).user = decoded as { id: string; email: string };
         return await next();
     } catch (error) {
         ctx.logger.error('JWT verification failed', { error });
