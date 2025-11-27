@@ -2,6 +2,7 @@ import type { ApiRouteConfig, Handlers } from 'motia';
 import AdvertisementService from "../../services/advertisement.service";
 import { CreateAdvertisementSchema, AdvertisementSchema } from "../../types/model.types";
 import { errorMiddleware } from '../../middlewares/error.middleware';
+import { CacheService } from '../../services/cache.service';
 
 export const config: ApiRouteConfig = {
   name: 'CreateAdvertisement',
@@ -17,9 +18,12 @@ export const config: ApiRouteConfig = {
   emits: [],
 };
 
-export const handler: Handlers['CreateAdvertisement'] = async (req, { logger }) => {
-  const validatedData = CreateAdvertisementSchema.parse(req.body);
-  const newAdvertisement = await AdvertisementService.create(validatedData);
-  return { status: 201, body: newAdvertisement };
-};
+export const handler: Handlers['CreateAdvertisement'] = async (req, ctx) => {
+  const data = CreateAdvertisementSchema.parse(req.body);
 
+  const advertisement = await AdvertisementService.create(data);
+
+  await CacheService.invalidate(ctx, 'advertisements');
+
+  return { status: 201, body: advertisement };
+};
