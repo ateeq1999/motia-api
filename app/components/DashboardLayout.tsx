@@ -9,14 +9,25 @@ export default function DashboardLayout() {
 
     return (
         <div className="antialiased bg-gray-50 dark:bg-gray-900 min-h-screen">
-            <Header />
             <Sidebar />
+            <Header />
+
             <main className={clsx(
-                "p-4 h-auto pt-20 transition-all duration-300",
-                sidebarOpen ? "sm:ml-64" : "ml-0"
+                "min-h-screen pt-20 pb-10 px-4 sm:px-6 lg:px-8 transition-all duration-300 ease-in-out",
+                "lg:ml-72" // Fixed margin for desktop
             )}>
-                <Outlet />
+                <div className="max-w-7xl mx-auto">
+                    <Outlet />
+                </div>
             </main>
+
+            {/* Overlay for mobile sidebar */}
+            {sidebarOpen && (
+                <div
+                    className="fixed inset-0 z-30 bg-gray-900/50 backdrop-blur-sm lg:hidden transition-opacity"
+                    onClick={() => useUIStore.getState().toggleSidebar()}
+                />
+            )}
         </div>
     );
 }
