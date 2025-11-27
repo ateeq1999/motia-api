@@ -17,6 +17,18 @@ type Pages = {
   "/login": {
     params: {};
   };
+  "/register": {
+    params: {};
+  };
+  "/forgot-password": {
+    params: {};
+  };
+  "/reset-password": {
+    params: {};
+  };
+  "/verify-email": {
+    params: {};
+  };
   "/dashboard": {
     params: {};
   };
@@ -43,7 +55,7 @@ type Pages = {
 type RouteFiles = {
   "root.tsx": {
     id: "root";
-    page: "/" | "/login" | "/dashboard" | "/dashboard/users" | "/dashboard/facilities" | "/dashboard/vouchers" | "/dashboard/events" | "/dashboard/restaurants" | "/dashboard/settings";
+    page: "/" | "/login" | "/register" | "/forgot-password" | "/reset-password" | "/verify-email" | "/dashboard" | "/dashboard/users" | "/dashboard/facilities" | "/dashboard/vouchers" | "/dashboard/events" | "/dashboard/restaurants" | "/dashboard/settings";
   };
   "routes/home.tsx": {
     id: "routes/home";
@@ -52,6 +64,22 @@ type RouteFiles = {
   "routes/login.tsx": {
     id: "routes/login";
     page: "/login";
+  };
+  "routes/register.tsx": {
+    id: "routes/register";
+    page: "/register";
+  };
+  "routes/forgot-password.tsx": {
+    id: "routes/forgot-password";
+    page: "/forgot-password";
+  };
+  "routes/reset-password.tsx": {
+    id: "routes/reset-password";
+    page: "/reset-password";
+  };
+  "routes/verify-email.tsx": {
+    id: "routes/verify-email";
+    page: "/verify-email";
   };
   "routes/dashboard/layout.tsx": {
     id: "routes/dashboard/layout";
@@ -107,6 +135,10 @@ type RouteModules = {
   "root": typeof import("./app/root.tsx");
   "routes/home": typeof import("./app/routes/home.tsx");
   "routes/login": typeof import("./app/routes/login.tsx");
+  "routes/register": typeof import("./app/routes/register.tsx");
+  "routes/forgot-password": typeof import("./app/routes/forgot-password.tsx");
+  "routes/reset-password": typeof import("./app/routes/reset-password.tsx");
+  "routes/verify-email": typeof import("./app/routes/verify-email.tsx");
   "routes/dashboard/layout": typeof import("./app/routes/dashboard/layout.tsx");
   "routes/dashboard/home": typeof import("./app/routes/dashboard/home.tsx");
   "routes/guards/admin-manager-guard": typeof import("./app/routes/guards/admin-manager-guard.tsx");
