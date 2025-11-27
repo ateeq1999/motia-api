@@ -17,7 +17,7 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['GetVisitor'] = async (req, { logger }) => {
-    const { id } = (req as any).params;
+    const { id } = req.pathParams;
     const visitor = await VisitorService.findById(id);
 
     if (!visitor) {

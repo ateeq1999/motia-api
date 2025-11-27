@@ -17,7 +17,7 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['GetFacility'] = async (req, { logger }) => {
-  const { id } = (req as any).params;
+  const { id } = req.pathParams;
   const facility = await FacilityService.findById(id);
 
   if (!facility) {

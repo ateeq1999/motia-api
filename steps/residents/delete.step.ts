@@ -15,7 +15,7 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['DeleteResident'] = async (req, { logger }) => {
-    const { id } = (req as any).params;
+    const { id } = req.pathParams;
     await ResidentService.delete(id);
     return { status: 200, body: { success: true } };
 };

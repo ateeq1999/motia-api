@@ -15,7 +15,7 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['DeleteVoucher'] = async (req, { logger }) => {
-    const { id } = req.params;
+    const { id } = req.pathParams;
     await VoucherService.delete(id);
     return { status: 200, body: { success: true } };
 };

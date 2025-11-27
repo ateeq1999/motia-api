@@ -18,7 +18,7 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['UpdateVoucher'] = async (req, { logger }) => {
-    const { id } = req.params;
+    const { id } = req.pathParams;
     const validatedData = UpdateVoucherSchema.parse(req.body);
     const updatedVoucher = await VoucherService.update(id, validatedData);
 

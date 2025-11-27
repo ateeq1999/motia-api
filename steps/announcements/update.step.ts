@@ -18,7 +18,7 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['UpdateAnnouncement'] = async (req, { logger }) => {
-  const { id } = (req as any).params;
+  const { id } = req.pathParams;
   const validatedData = UpdateAnnouncementSchema.parse(req.body);
   const updatedAnnouncement = await AnnouncementService.update(id, validatedData);
 

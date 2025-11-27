@@ -17,7 +17,7 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['GetSecurityCheckLog'] = async (req, { logger }) => {
-    const { id } = (req as any).params;
+    const { id } = req.pathParams;
     const securityCheckLog = await SecurityCheckLogService.findById(id);
 
     if (!securityCheckLog) {

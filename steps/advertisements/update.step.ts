@@ -18,7 +18,7 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['UpdateAdvertisement'] = async (req, { logger }) => {
-  const { id } = (req as any).params;
+  const { id } = req.pathParams;
   const validatedData = UpdateAdvertisementSchema.parse(req.body);
   const updatedAdvertisement = await AdvertisementService.update(id, validatedData);
 

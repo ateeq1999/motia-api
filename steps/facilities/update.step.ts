@@ -18,7 +18,7 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['UpdateFacility'] = async (req, { logger }) => {
-  const { id } = (req as any).params;
+  const { id } = req.pathParams;
   const validatedData = UpdateFacilitySchema.parse(req.body);
   const updatedFacility = await FacilityService.update(id, validatedData);
 

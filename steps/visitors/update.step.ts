@@ -18,7 +18,7 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['UpdateVisitor'] = async (req, { logger }) => {
-    const { id } = (req as any).params;
+    const { id } = req.pathParams;
     const validatedData = UpdateVisitorSchema.parse(req.body);
     const updatedVisitor = await VisitorService.update(id, validatedData);
 
