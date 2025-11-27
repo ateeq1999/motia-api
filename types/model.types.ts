@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 // --- Advertisement ---
 export const AdvertisementSchema = z.object({
-  id: z.string().uuid(),
+  id: z.string(),
   partner_id: z.string().optional(),
   title: z.string(),
   description: z.string().optional(),
@@ -22,7 +22,7 @@ export type UpdateAdvertisement = z.infer<typeof UpdateAdvertisementSchema>;
 
 // --- Announcement ---
 export const AnnouncementSchema = z.object({
-  id: z.string().uuid(),
+  id: z.string(),
   title: z.string(),
   content: z.string(),
   is_urgent: z.boolean().optional().default(false),
@@ -41,7 +41,7 @@ export type UpdateAnnouncement = z.infer<typeof UpdateAnnouncementSchema>;
 
 // --- Event ---
 export const EventSchema = z.object({
-  id: z.string().uuid(),
+  id: z.string(),
   name: z.string(),
   image_url: z.string().optional(),
   description: z.string().optional(),
@@ -49,7 +49,7 @@ export const EventSchema = z.object({
   event_date: z.string().datetime({ offset: true }),
   tags: z.array(z.string()).optional(),
   created_at: z.string().datetime({ offset: true }).optional(),
-  created_by: z.string().uuid().optional(),
+  created_by: z.string().optional(),
 });
 
 export const CreateEventSchema = EventSchema.omit({ id: true, created_at: true });
@@ -61,10 +61,10 @@ export type UpdateEvent = z.infer<typeof UpdateEventSchema>;
 
 // --- Facility ---
 export const FacilitySchema = z.object({
-  id: z.string().uuid(),
+  id: z.string(),
   name: z.string(),
   location: z.string().optional(),
-  manager_id: z.string().uuid().optional(),
+  manager_id: z.string().optional(),
   created_at: z.string().datetime({ offset: true }).optional(),
 });
 
@@ -77,8 +77,8 @@ export type UpdateFacility = z.infer<typeof UpdateFacilitySchema>;
 
 // --- Guard ---
 export const GuardSchema = z.object({
-  id: z.string().uuid(),
-  user_id: z.string().uuid().optional(),
+  id: z.string(),
+  user_id: z.string().optional(),
   name: z.string(),
   email: z.string().email(),
   phone: z.string().optional(),
@@ -97,7 +97,7 @@ export type UpdateGuard = z.infer<typeof UpdateGuardSchema>;
 
 // --- Offer ---
 export const OfferSchema = z.object({
-  id: z.string().uuid(),
+  id: z.string(),
   title: z.string(),
   image_url: z.string().optional(),
   description: z.string().optional(),
@@ -117,8 +117,8 @@ export type UpdateOffer = z.infer<typeof UpdateOfferSchema>;
 
 // --- Profile ---
 export const ProfileSchema = z.object({
-  id: z.string().uuid(),
-  user_id: z.string().uuid().optional(),
+  id: z.string(),
+  user_id: z.string().optional(),
   full_name: z.string().optional(),
   avatar_url: z.string().optional(),
   phone: z.string().optional(),
@@ -135,7 +135,7 @@ export type UpdateProfile = z.infer<typeof UpdateProfileSchema>;
 
 // --- Property Category ---
 export const PropertyCategorySchema = z.object({
-  id: z.string().uuid(),
+  id: z.string(),
   name: z.string(),
   description: z.string().optional(),
 });
@@ -149,9 +149,9 @@ export type UpdatePropertyCategory = z.infer<typeof UpdatePropertyCategorySchema
 
 // --- Property ---
 export const PropertySchema = z.object({
-  id: z.string().uuid(),
+  id: z.string(),
   name: z.string(),
-  category_id: z.string().uuid().optional(),
+  category_id: z.string().optional(),
   phone: z.string().optional(),
   location: z.string(),
   description: z.string().optional(),
@@ -170,15 +170,15 @@ export type UpdateProperty = z.infer<typeof UpdatePropertySchema>;
 
 // --- Resident ---
 export const ResidentSchema = z.object({
-  id: z.string().uuid(),
-  user_id: z.string().uuid().optional(),
+  id: z.string(),
+  user_id: z.string().optional(),
   name: z.string(),
   email: z.string().email(),
   phone: z.string().optional(),
   unit: z.string().optional(),
   profile_image_url: z.string().optional(),
   created_at: z.string().datetime({ offset: true }).optional(),
-  property_id: z.string().uuid().optional(),
+  property_id: z.string().optional(),
 });
 
 export const CreateResidentSchema = ResidentSchema.omit({ id: true, created_at: true });
@@ -190,9 +190,9 @@ export type UpdateResident = z.infer<typeof UpdateResidentSchema>;
 
 // --- Security Check Log ---
 export const SecurityCheckLogSchema = z.object({
-  id: z.string().uuid(),
-  visitor_id: z.string().uuid().optional(),
-  guard_id: z.string().uuid().optional(),
+  id: z.string(),
+  visitor_id: z.string().optional(),
+  guard_id: z.string().optional(),
   check_time: z.string().datetime({ offset: true }).optional(),
   action: z.string().optional(),
   details: z.string().optional(),
@@ -207,10 +207,10 @@ export type UpdateSecurityCheckLog = z.infer<typeof UpdateSecurityCheckLogSchema
 
 // --- Visit Log ---
 export const VisitLogSchema = z.object({
-  id: z.string().uuid(),
-  visitor_id: z.string().uuid().optional(),
-  resident_id: z.string().uuid().optional(),
-  property_id: z.string().uuid().optional(),
+  id: z.string(),
+  visitor_id: z.string().optional(),
+  resident_id: z.string().optional(),
+  property_id: z.string().optional(),
   action: z.string(),
   details: z.string().optional(),
   created_at: z.string().datetime({ offset: true }).optional(),
@@ -225,8 +225,8 @@ export type UpdateVisitLog = z.infer<typeof UpdateVisitLogSchema>;
 
 // --- Visitor ---
 export const VisitorSchema = z.object({
-  id: z.string().uuid(),
-  resident_id: z.string().uuid().optional(),
+  id: z.string(),
+  resident_id: z.string().optional(),
   name: z.string(),
   phone: z.string().optional(),
   purpose: z.string().optional(),
@@ -251,10 +251,10 @@ export type UpdateVisitor = z.infer<typeof UpdateVisitorSchema>;
 
 // --- Voucher ---
 export const VoucherSchema = z.object({
-  id: z.string().uuid(),
+  id: z.string(),
   code: z.string(),
-  resident_id: z.string().uuid().optional(),
-  facility_id: z.string().uuid().optional(),
+  resident_id: z.string().optional(),
+  facility_id: z.string().optional(),
   status: z.enum(['active', 'redeemed', 'expired']).optional().default('active'),
   expires_at: z.string().datetime({ offset: true }).optional(),
   created_at: z.string().datetime({ offset: true }).optional(),
@@ -266,4 +266,3 @@ export const UpdateVoucherSchema = VoucherSchema.partial();
 export type Voucher = z.infer<typeof VoucherSchema>;
 export type CreateVoucher = z.infer<typeof CreateVoucherSchema>;
 export type UpdateVoucher = z.infer<typeof UpdateVoucherSchema>;
-
