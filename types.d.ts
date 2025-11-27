@@ -5,7 +5,6 @@
  * Consider adding this file to .prettierignore and eslint ignore.
  */
 import { EventHandler, ApiRouteHandler, ApiResponse, MotiaStream, CronHandler } from 'motia'
-
 declare module 'motia' {
   interface FlowContextStateStreams {
     
