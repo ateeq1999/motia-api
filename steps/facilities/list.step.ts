@@ -16,6 +16,6 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['ListFacilities'] = async (req, { logger }) => {
-  const facilities = await FacilityService.list();
+  const facilities = await FacilityService.findAll();
   return { status: 200, body: facilities };
 };

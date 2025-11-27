@@ -18,7 +18,7 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['UpdateEvent'] = async (req, { logger }) => {
-  const { id } = req.params;
+  const { id } = (req as any).params;
   const validatedData = UpdateEventSchema.parse(req.body);
   const updatedEvent = await EventService.update(id, validatedData);
 

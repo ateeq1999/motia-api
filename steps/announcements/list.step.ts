@@ -16,6 +16,6 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['ListAnnouncements'] = async (req, { logger }) => {
-  const announcements = await AnnouncementService.list();
+  const announcements = await AnnouncementService.findAll();
   return { status: 200, body: announcements };
 };

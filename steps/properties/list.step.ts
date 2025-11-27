@@ -16,6 +16,6 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['ListProperties'] = async (req, { logger }) => {
-    const properties = await PropertyService.list();
+    const properties = await PropertyService.findAll();
     return { status: 200, body: properties };
 };

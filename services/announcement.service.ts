@@ -2,19 +2,8 @@ import { createId } from "@paralleldrive/cuid2";
 import db from "../db/connection";
 import { Announcement } from "../types/model.types";
 
-class AnnouncementService {
-  private static instance: AnnouncementService;
-
-  private constructor() { }
-
-  public static getInstance(): AnnouncementService {
-    if (!AnnouncementService.instance) {
-      AnnouncementService.instance = new AnnouncementService();
-    }
-    return AnnouncementService.instance;
-  }
-
-  public async create(
+export class AnnouncementService {
+  static async create(
     announcement: Omit<Announcement, "id" | "created_at">
   ): Promise<Announcement> {
     const id = createId();
@@ -24,19 +13,19 @@ class AnnouncementService {
     return newAnnouncement;
   }
 
-  public async delete(id: string): Promise<void> {
+  static async delete(id: string): Promise<void> {
     await db("announcements").where({ id }).del();
   }
 
-  public async get(id: string): Promise<Announcement | undefined> {
+  static async findById(id: string): Promise<Announcement | undefined> {
     return await db("announcements").where({ id }).first();
   }
 
-  public async list(): Promise<Announcement[]> {
+  static async findAll(): Promise<Announcement[]> {
     return await db("announcements").select("*");
   }
 
-  public async update(
+  static async update(
     id: string,
     updates: Partial<Omit<Announcement, "id" | "created_at">>
   ): Promise<Announcement | undefined> {
@@ -48,4 +37,4 @@ class AnnouncementService {
   }
 }
 
-export default AnnouncementService.getInstance();
+export default AnnouncementService;

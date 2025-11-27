@@ -17,8 +17,8 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['GetAnnouncement'] = async (req, { logger }) => {
-  const { id } = req.params;
-  const announcement = await AnnouncementService.get(id);
+  const { id } = (req as any).params;
+  const announcement = await AnnouncementService.findById(id);
 
   if (!announcement) {
     return { status: 404, body: { error: "Announcement not found" } };

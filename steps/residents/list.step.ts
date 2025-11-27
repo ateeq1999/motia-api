@@ -16,6 +16,6 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['ListResidents'] = async (req, { logger }) => {
-    const residents = await ResidentService.list();
+    const residents = await ResidentService.findAll();
     return { status: 200, body: residents };
 };

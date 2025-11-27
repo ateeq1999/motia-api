@@ -2,19 +2,8 @@ import { createId } from "@paralleldrive/cuid2";
 import db from "../db/connection";
 import { Event } from "../types/model.types";
 
-class EventService {
-  private static instance: EventService;
-
-  private constructor() { }
-
-  public static getInstance(): EventService {
-    if (!EventService.instance) {
-      EventService.instance = new EventService();
-    }
-    return EventService.instance;
-  }
-
-  public async create(
+export class EventService {
+  static async create(
     event: Omit<Event, "id" | "created_at">
   ): Promise<Event> {
     const id = createId();
@@ -24,19 +13,19 @@ class EventService {
     return newEvent;
   }
 
-  public async delete(id: string): Promise<void> {
+  static async delete(id: string): Promise<void> {
     await db("events").where({ id }).del();
   }
 
-  public async get(id: string): Promise<Event | undefined> {
+  static async findById(id: string): Promise<Event | undefined> {
     return await db("events").where({ id }).first();
   }
 
-  public async list(): Promise<Event[]> {
+  static async findAll(): Promise<Event[]> {
     return await db("events").select("*");
   }
 
-  public async update(
+  static async update(
     id: string,
     updates: Partial<Omit<Event, "id" | "created_at">>
   ): Promise<Event | undefined> {
@@ -48,4 +37,4 @@ class EventService {
   }
 }
 
-export default EventService.getInstance();
+export default EventService;

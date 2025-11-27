@@ -17,8 +17,8 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['GetEvent'] = async (req, { logger }) => {
-  const { id } = req.params;
-  const event = await EventService.get(id);
+  const { id } = (req as any).params;
+  const event = await EventService.findById(id);
 
   if (!event) {
     return { status: 404, body: { error: "Event not found" } };

@@ -16,6 +16,6 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['ListAdvertisements'] = async (req, { logger }) => {
-  const advertisements = await AdvertisementService.list();
+  const advertisements = await AdvertisementService.findAll();
   return { status: 200, body: advertisements };
 };

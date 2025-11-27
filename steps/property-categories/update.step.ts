@@ -18,7 +18,7 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['UpdatePropertyCategory'] = async (req, { logger }) => {
-    const { id } = req.params;
+    const { id } = (req as any).params;
     const validatedData = UpdatePropertyCategorySchema.parse(req.body);
     const updatedPropertyCategory = await PropertyCategoryService.update(id, validatedData);
 

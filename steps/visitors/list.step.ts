@@ -16,6 +16,6 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['ListVisitors'] = async (req, { logger }) => {
-    const visitors = await VisitorService.list();
+    const visitors = await VisitorService.findAll();
     return { status: 200, body: visitors };
 };

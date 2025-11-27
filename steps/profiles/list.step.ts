@@ -16,6 +16,6 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['ListProfiles'] = async (req, { logger }) => {
-    const profiles = await ProfileService.list();
+    const profiles = await ProfileService.findAll();
     return { status: 200, body: profiles };
 };

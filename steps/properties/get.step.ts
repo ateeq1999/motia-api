@@ -17,8 +17,8 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['GetProperty'] = async (req, { logger }) => {
-    const { id } = req.params;
-    const property = await PropertyService.get(id);
+    const { id } = (req as any).params;
+    const property = await PropertyService.findById(id);
 
     if (!property) {
         return { status: 404, body: { error: "Property not found" } };

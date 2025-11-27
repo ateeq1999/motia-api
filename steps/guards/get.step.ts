@@ -17,8 +17,8 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['GetGuard'] = async (req, { logger }) => {
-  const { id } = req.params;
-  const guard = await GuardService.get(id);
+  const { id } = (req as any).params;
+  const guard = await GuardService.findById(id);
 
   if (!guard) {
     return { status: 404, body: { error: "Guard not found" } };

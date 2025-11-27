@@ -2,19 +2,8 @@ import { createId } from "@paralleldrive/cuid2";
 import db from "../db/connection";
 import { Advertisement } from "../types/model.types";
 
-class AdvertisementService {
-  private static instance: AdvertisementService;
-
-  private constructor() { }
-
-  public static getInstance(): AdvertisementService {
-    if (!AdvertisementService.instance) {
-      AdvertisementService.instance = new AdvertisementService();
-    }
-    return AdvertisementService.instance;
-  }
-
-  public async create(
+export class AdvertisementService {
+  static async create(
     advertisement: Omit<Advertisement, "id" | "created_at">
   ): Promise<Advertisement> {
     const id = createId();
@@ -24,19 +13,19 @@ class AdvertisementService {
     return newAdvertisement;
   }
 
-  public async delete(id: string): Promise<void> {
+  static async delete(id: string): Promise<void> {
     await db("advertisements").where({ id }).del();
   }
 
-  public async get(id: string): Promise<Advertisement | undefined> {
+  static async findById(id: string): Promise<Advertisement | undefined> {
     return await db("advertisements").where({ id }).first();
   }
 
-  public async list(): Promise<Advertisement[]> {
+  static async findAll(): Promise<Advertisement[]> {
     return await db("advertisements").select("*");
   }
 
-  public async update(
+  static async update(
     id: string,
     updates: Partial<Omit<Advertisement, "id" | "created_at">>
   ): Promise<Advertisement | undefined> {
@@ -48,4 +37,4 @@ class AdvertisementService {
   }
 }
 
-export default AdvertisementService.getInstance();
+export default AdvertisementService;

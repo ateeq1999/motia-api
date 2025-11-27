@@ -15,7 +15,7 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['DeleteAnnouncement'] = async (req, { logger }) => {
-  const { id } = req.params;
+  const { id } = (req as any).params;
   await AnnouncementService.delete(id);
   return { status: 200, body: { success: true } };
 };

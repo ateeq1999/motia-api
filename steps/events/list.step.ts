@@ -16,6 +16,6 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['ListEvents'] = async (req, { logger }) => {
-  const events = await EventService.list();
+  const events = await EventService.findAll();
   return { status: 200, body: events };
 };

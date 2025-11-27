@@ -18,7 +18,7 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['UpdateOffer'] = async (req, { logger }) => {
-    const { id } = req.params;
+    const { id } = (req as any).params;
     const validatedData = UpdateOfferSchema.parse(req.body);
     const updatedOffer = await OfferService.update(id, validatedData);
 

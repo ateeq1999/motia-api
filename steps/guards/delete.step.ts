@@ -15,7 +15,7 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['DeleteGuard'] = async (req, { logger }) => {
-  const { id } = req.params;
+  const { id } = (req as any).params;
   await GuardService.delete(id);
   return { status: 200, body: { success: true } };
 };

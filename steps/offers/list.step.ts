@@ -16,6 +16,6 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['ListOffers'] = async (req, { logger }) => {
-    const offers = await OfferService.list();
+    const offers = await OfferService.findAll();
     return { status: 200, body: offers };
 };

@@ -18,7 +18,7 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['UpdateGuard'] = async (req, { logger }) => {
-  const { id } = req.params;
+  const { id } = (req as any).params;
   const validatedData = UpdateGuardSchema.parse(req.body);
   const updatedGuard = await GuardService.update(id, validatedData);
 

@@ -15,7 +15,7 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['DeleteProfile'] = async (req, { logger }) => {
-    const { id } = req.params;
+    const { id } = (req as any).params;
     await ProfileService.delete(id);
     return { status: 200, body: { success: true } };
 };

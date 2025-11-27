@@ -2,19 +2,8 @@ import { createId } from "@paralleldrive/cuid2";
 import db from "../db/connection";
 import { Guard } from "../types/model.types";
 
-class GuardService {
-  private static instance: GuardService;
-
-  private constructor() { }
-
-  public static getInstance(): GuardService {
-    if (!GuardService.instance) {
-      GuardService.instance = new GuardService();
-    }
-    return GuardService.instance;
-  }
-
-  public async create(
+export class GuardService {
+  static async create(
     guard: Omit<Guard, "id" | "created_at">
   ): Promise<Guard> {
     const id = createId();
@@ -24,19 +13,19 @@ class GuardService {
     return newGuard;
   }
 
-  public async delete(id: string): Promise<void> {
+  static async delete(id: string): Promise<void> {
     await db("guards").where({ id }).del();
   }
 
-  public async get(id: string): Promise<Guard | undefined> {
+  static async findById(id: string): Promise<Guard | undefined> {
     return await db("guards").where({ id }).first();
   }
 
-  public async list(): Promise<Guard[]> {
+  static async findAll(): Promise<Guard[]> {
     return await db("guards").select("*");
   }
 
-  public async update(
+  static async update(
     id: string,
     updates: Partial<Omit<Guard, "id" | "created_at">>
   ): Promise<Guard | undefined> {
@@ -48,4 +37,4 @@ class GuardService {
   }
 }
 
-export default GuardService.getInstance();
+export default GuardService;

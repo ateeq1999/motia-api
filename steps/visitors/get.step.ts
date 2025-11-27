@@ -17,8 +17,8 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['GetVisitor'] = async (req, { logger }) => {
-    const { id } = req.params;
-    const visitor = await VisitorService.get(id);
+    const { id } = (req as any).params;
+    const visitor = await VisitorService.findById(id);
 
     if (!visitor) {
         return { status: 404, body: { error: "Visitor not found" } };

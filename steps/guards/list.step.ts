@@ -16,6 +16,6 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['ListGuards'] = async (req, { logger }) => {
-  const guards = await GuardService.list();
+  const guards = await GuardService.findAll();
   return { status: 200, body: guards };
 };

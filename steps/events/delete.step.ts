@@ -15,7 +15,7 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['DeleteEvent'] = async (req, { logger }) => {
-  const { id } = req.params;
+  const { id } = (req as any).params;
   await EventService.delete(id);
   return { status: 200, body: { success: true } };
 };

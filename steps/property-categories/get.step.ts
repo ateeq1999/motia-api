@@ -17,7 +17,7 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['GetPropertyCategory'] = async (req, { logger }) => {
-    const { id } = req.params;
+    const { id } = (req as any).params;
     const propertyCategory = await PropertyCategoryService.findById(id);
 
     if (!propertyCategory) {

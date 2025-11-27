@@ -17,8 +17,8 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['GetResident'] = async (req, { logger }) => {
-    const { id } = req.params;
-    const resident = await ResidentService.get(id);
+    const { id } = (req as any).params;
+    const resident = await ResidentService.findById(id);
 
     if (!resident) {
         return { status: 404, body: { error: "Resident not found" } };

@@ -18,7 +18,7 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['UpdateSecurityCheckLog'] = async (req, { logger }) => {
-    const { id } = req.params;
+    const { id } = (req as any).params;
     const validatedData = UpdateSecurityCheckLogSchema.parse(req.body);
     const updatedSecurityCheckLog = await SecurityCheckLogService.update(id, validatedData);
 

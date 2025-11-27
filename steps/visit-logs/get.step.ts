@@ -17,7 +17,7 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['GetVisitLog'] = async (req, { logger }) => {
-    const { id } = req.params;
+    const { id } = (req as any).params;
     const visitLog = await VisitLogService.findById(id);
 
     if (!visitLog) {

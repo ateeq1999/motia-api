@@ -17,8 +17,8 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['GetProfile'] = async (req, { logger }) => {
-    const { id } = req.params;
-    const profile = await ProfileService.get(id);
+    const { id } = (req as any).params;
+    const profile = await ProfileService.findById(id);
 
     if (!profile) {
         return { status: 404, body: { error: "Profile not found" } };

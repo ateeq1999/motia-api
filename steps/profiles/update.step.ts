@@ -18,7 +18,7 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['UpdateProfile'] = async (req, { logger }) => {
-    const { id } = req.params;
+    const { id } = (req as any).params;
     const validatedData = UpdateProfileSchema.parse(req.body);
     const updatedProfile = await ProfileService.update(id, validatedData);
 

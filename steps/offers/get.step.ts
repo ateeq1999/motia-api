@@ -17,8 +17,8 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['GetOffer'] = async (req, { logger }) => {
-    const { id } = req.params;
-    const offer = await OfferService.get(id);
+    const { id } = (req as any).params;
+    const offer = await OfferService.findById(id);
 
     if (!offer) {
         return { status: 404, body: { error: "Offer not found" } };

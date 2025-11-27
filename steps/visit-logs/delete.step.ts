@@ -15,7 +15,7 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['DeleteVisitLog'] = async (req, { logger }) => {
-    const { id } = req.params;
+    const { id } = (req as any).params;
     await VisitLogService.delete(id);
     return { status: 200, body: { success: true } };
 };

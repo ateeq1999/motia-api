@@ -17,8 +17,8 @@ export const config: ApiRouteConfig = {
 };
 
 export const handler: Handlers['GetAdvertisement'] = async (req, { logger }) => {
-  const { id } = req.params;
-  const advertisement = await AdvertisementService.get(id);
+  const { id } = (req as any).params;
+  const advertisement = await AdvertisementService.findById(id);
 
   if (!advertisement) {
     return { status: 404, body: { error: "Advertisement not found" } };
