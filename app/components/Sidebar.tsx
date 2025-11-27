@@ -4,6 +4,7 @@ import { useUIStore } from '../store/uiStore';
 import { useAuthStore } from '../store/authStore';
 import { type UserRole } from '../types/auth';
 import clsx from 'clsx';
+import { Logo } from './ui/Logo';
 
 interface NavLink {
     name: string;
@@ -65,8 +66,7 @@ export function Sidebar() {
             <div className="h-full px-4 py-6 bg-white dark:bg-gray-900 border-r border-gray-100 dark:border-gray-800 shadow-xl lg:shadow-none flex flex-col">
                 {/* Logo Area */}
                 <div className="flex items-center mb-8 px-2">
-                    <div className="h-10 w-10 bg-brand-primary rounded-xl mr-3 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-brand-primary/30">K</div>
-                    <span className="self-center text-xl font-bold whitespace-nowrap text-gray-900 dark:text-white tracking-tight">Karibu Pass</span>
+                    <Logo />
                 </div>
 
                 {/* Navigation */}

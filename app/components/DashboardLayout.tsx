@@ -8,7 +8,9 @@ export default function DashboardLayout() {
     const { sidebarOpen } = useUIStore();
 
     return (
-        <div className="antialiased bg-gray-50 dark:bg-gray-900 min-h-screen">
+        <div className="antialiased bg-gray-50 dark:bg-gray-900 min-h-screen relative">
+            {/* Background Pattern */}
+            <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-[0.03] dark:opacity-[0.05] pointer-events-none" />
             <Sidebar />
             <Header />
 

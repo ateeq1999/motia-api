@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Logo } from '../ui/Logo';
 
 interface AuthLayoutProps {
     children: React.ReactNode;
@@ -17,10 +17,7 @@ export function AuthLayout({ children, title, subtitle }: AuthLayoutProps) {
 
                 {/* Logo */}
                 <div className="relative z-10">
-                    <Link to="/" className="flex items-center gap-3 text-2xl font-bold">
-                        <img src="/logos/logo_white_icon.png" alt="Karibu Pass" className="h-10 w-auto" />
-                        <span>Karibu Pass</span>
-                    </Link>
+                    <Logo variant="white" size="lg" />
                 </div>
 
                 {/* Main Text Content */}
@@ -44,10 +41,7 @@ export function AuthLayout({ children, title, subtitle }: AuthLayoutProps) {
                 <div className="w-full max-w-md space-y-8">
                     {/* Mobile Logo (visible only on small screens) */}
                     <div className="lg:hidden flex justify-center mb-8">
-                        <Link to="/" className="flex items-center gap-2">
-                            <img src="/logos/logo_icon.png" alt="Karibu Pass" className="h-10 w-auto" />
-                            <span className="text-2xl font-bold text-gray-900 dark:text-white">Karibu Pass</span>
-                        </Link>
+                        <Logo size="lg" />
                     </div>
 
                     <div className="text-center lg:text-left">
