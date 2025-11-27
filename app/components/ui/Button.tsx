@@ -9,10 +9,10 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ({ className, variant = 'primary', isLoading, children, ...props }, ref) => {
         const variants = {
-            primary: "text-white bg-brand-primary hover:bg-brand-secondary focus:ring-4 focus:outline-none focus:ring-brand-primary/50 dark:bg-brand-primary dark:hover:bg-brand-secondary dark:focus:ring-brand-primary/50",
-            secondary: "text-white bg-brand-secondary hover:bg-brand-primary focus:ring-4 focus:outline-none focus:ring-brand-secondary/50",
-            outline: "text-gray-900 bg-transparent border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700",
-            ghost: "text-brand-primary bg-transparent hover:bg-brand-primary/10 focus:ring-4 focus:outline-none focus:ring-brand-primary/50 dark:text-brand-accent dark:hover:bg-brand-accent/10",
+            primary: "text-white bg-brand-primary hover:bg-brand-secondary shadow-md hover:shadow-lg focus:ring-4 focus:ring-brand-primary/30 dark:bg-brand-primary dark:hover:bg-brand-secondary dark:focus:ring-brand-primary/30",
+            secondary: "text-white bg-brand-secondary hover:bg-brand-primary shadow-md hover:shadow-lg focus:ring-4 focus:ring-brand-secondary/30",
+            outline: "text-gray-900 bg-transparent border-2 border-gray-200 hover:bg-gray-50 hover:border-gray-300 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-800 dark:hover:border-gray-600 dark:focus:ring-gray-700",
+            ghost: "text-brand-primary bg-transparent hover:bg-brand-primary/5 focus:ring-4 focus:ring-brand-primary/20 dark:text-brand-accent dark:hover:bg-brand-accent/10",
         };
 
         return (
@@ -20,9 +20,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                 ref={ref}
                 disabled={isLoading || props.disabled}
                 className={clsx(
-                    "w-full font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-all duration-200 flex items-center justify-center",
+                    "w-full font-medium rounded-xl text-sm px-5 py-3 text-center transition-all duration-200 flex items-center justify-center active:scale-[0.98]",
                     variants[variant],
-                    (isLoading || props.disabled) && "opacity-50 cursor-not-allowed",
+                    (isLoading || props.disabled) && "opacity-70 cursor-not-allowed active:scale-100",
                     className
                 )}
                 {...props}
