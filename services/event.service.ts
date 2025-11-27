@@ -1,3 +1,4 @@
+import { createId } from "@paralleldrive/cuid2";
 import db from "../db/connection";
 import { Event } from "../types/model.types";
 
@@ -16,8 +17,9 @@ class EventService {
   public async create(
     event: Omit<Event, "id" | "created_at">
   ): Promise<Event> {
+    const id = createId();
     const [newEvent] = await db("events")
-      .insert(event)
+      .insert({ ...event, id })
       .returning("*");
     return newEvent;
   }

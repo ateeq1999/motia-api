@@ -1,3 +1,4 @@
+import { createId } from "@paralleldrive/cuid2";
 import db from "../db/connection";
 import { Guard } from "../types/model.types";
 
@@ -16,8 +17,9 @@ class GuardService {
   public async create(
     guard: Omit<Guard, "id" | "created_at">
   ): Promise<Guard> {
+    const id = createId();
     const [newGuard] = await db("guards")
-      .insert(guard)
+      .insert({ ...guard, id })
       .returning("*");
     return newGuard;
   }

@@ -1,3 +1,4 @@
+import { createId } from "@paralleldrive/cuid2";
 import db from "../db/connection";
 import { Advertisement } from "../types/model.types";
 
@@ -16,8 +17,9 @@ class AdvertisementService {
   public async create(
     advertisement: Omit<Advertisement, "id" | "created_at">
   ): Promise<Advertisement> {
+    const id = createId();
     const [newAdvertisement] = await db("advertisements")
-      .insert(advertisement)
+      .insert({ ...advertisement, id })
       .returning("*");
     return newAdvertisement;
   }

@@ -17,6 +17,9 @@ export const config: ApiRouteConfig = {
 
 export const handler: Handlers['CreateAdvertisement'] = async (req, { logger }) => {
   const validatedData = CreateAdvertisementSchema.parse(req.body);
+  if (!validatedData) {
+    return { status: 400, body: { error: 'Invalid data' } };
+  }
   const newAdvertisement = await AdvertisementService.create(validatedData);
   return { status: 201, body: newAdvertisement };
 };

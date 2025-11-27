@@ -1,3 +1,4 @@
+import { createId } from "@paralleldrive/cuid2";
 import db from "../db/connection";
 import { Facility } from "../types/model.types";
 
@@ -16,8 +17,9 @@ class FacilityService {
   public async create(
     facility: Omit<Facility, "id" | "created_at">
   ): Promise<Facility> {
+    const id = createId();
     const [newFacility] = await db("facilities")
-      .insert(facility)
+      .insert({ ...facility, id })
       .returning("*");
     return newFacility;
   }
