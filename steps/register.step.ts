@@ -3,6 +3,8 @@ import { z } from 'zod';
 import db from '../db/connection';
 import bcrypt from 'bcrypt';
 import { createId } from '@paralleldrive/cuid2';
+import { errorMiddleware } from '../middlewares/error.middleware';
+import { AppError } from '../errors/AppError';
 
 const registerSchema = z.object({
     email: z.string().email('Invalid email address').min(1, 'Email is required').max(255, 'Email must be less than 255 characters'),
@@ -17,6 +19,7 @@ export const config: ApiRouteConfig = {
     method: 'POST',
     bodySchema: registerSchema,
     emits: [],
+    middleware: [errorMiddleware],
 }
 
 export const handler: Handlers['Register'] = async (req, { logger }) => {
@@ -25,7 +28,7 @@ export const handler: Handlers['Register'] = async (req, { logger }) => {
     const existingUser = await db('users').where({ email }).first();
 
     if (existingUser) {
-        throw new Error('User with this email already exists.');
+        throw new AppError('User with this email already exists.', 409);
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);

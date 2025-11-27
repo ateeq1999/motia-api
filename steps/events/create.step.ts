@@ -1,6 +1,7 @@
 import type { ApiRouteConfig, Handlers } from 'motia';
 import EventService from "../../services/event.service";
 import { CreateEventSchema, EventSchema } from "../../types/model.types";
+import { errorMiddleware } from '../../middlewares/error.middleware';
 
 export const config: ApiRouteConfig = {
   name: 'CreateEvent',
@@ -13,6 +14,7 @@ export const config: ApiRouteConfig = {
     201: EventSchema
   },
   emits: [],
+  middleware: [errorMiddleware],
 };
 
 export const handler: Handlers['CreateEvent'] = async (req, { logger }) => {

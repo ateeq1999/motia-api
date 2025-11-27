@@ -1,6 +1,7 @@
 import type { ApiRouteConfig, Handlers } from 'motia';
 import ResidentService from "../../services/resident.service";
 import { CreateResidentSchema, ResidentSchema } from "../../types/model.types";
+import { errorMiddleware } from '../../middlewares/error.middleware';
 
 export const config: ApiRouteConfig = {
     name: 'CreateResident',
@@ -13,6 +14,7 @@ export const config: ApiRouteConfig = {
         201: ResidentSchema
     },
     emits: [],
+    middleware: [errorMiddleware],
 };
 
 export const handler: Handlers['CreateResident'] = async (req, { logger }) => {

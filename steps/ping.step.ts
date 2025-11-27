@@ -1,5 +1,6 @@
 import type { ApiRouteConfig, Handlers } from 'motia';
 import { z } from 'zod';
+import { errorMiddleware } from '../middlewares/error.middleware';
 
 const pingSchema = z.object({
     name: z.string().optional().default('World'),
@@ -20,6 +21,7 @@ export const config: ApiRouteConfig = {
     method: 'POST',
     bodySchema: pingSchema,
     emits: [],
+    middleware: [errorMiddleware],
 }
 
 export const handler: Handlers['Ping'] = async (req, { logger }) => {

@@ -2,6 +2,7 @@ import type { ApiRouteConfig, Handlers } from 'motia';
 import GuardService from "../../services/guard.service";
 import { GuardSchema } from "../../types/model.types";
 import { z } from 'zod';
+import { errorMiddleware } from '../../middlewares/error.middleware';
 
 export const config: ApiRouteConfig = {
   name: 'GetGuard',
@@ -14,6 +15,7 @@ export const config: ApiRouteConfig = {
     404: z.object({ error: z.string() })
   },
   emits: [],
+  middleware: [errorMiddleware],
 };
 
 export const handler: Handlers['GetGuard'] = async (req, { logger }) => {

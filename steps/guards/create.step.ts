@@ -1,6 +1,7 @@
 import type { ApiRouteConfig, Handlers } from 'motia';
 import GuardService from "../../services/guard.service";
 import { CreateGuardSchema, GuardSchema } from "../../types/model.types";
+import { errorMiddleware } from '../../middlewares/error.middleware';
 
 export const config: ApiRouteConfig = {
   name: 'CreateGuard',
@@ -13,6 +14,7 @@ export const config: ApiRouteConfig = {
     201: GuardSchema
   },
   emits: [],
+  middleware: [errorMiddleware],
 };
 
 export const handler: Handlers['CreateGuard'] = async (req, { logger }) => {

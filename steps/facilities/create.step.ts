@@ -1,6 +1,7 @@
 import type { ApiRouteConfig, Handlers } from 'motia';
 import FacilityService from "../../services/facility.service";
 import { CreateFacilitySchema, FacilitySchema } from "../../types/model.types";
+import { errorMiddleware } from '../../middlewares/error.middleware';
 
 export const config: ApiRouteConfig = {
   name: 'CreateFacility',
@@ -13,6 +14,7 @@ export const config: ApiRouteConfig = {
     201: FacilitySchema
   },
   emits: [],
+  middleware: [errorMiddleware],
 };
 
 export const handler: Handlers['CreateFacility'] = async (req, { logger }) => {

@@ -1,6 +1,7 @@
 import type { ApiRouteConfig, Handlers } from 'motia';
 import PropertyCategoryService from "../../services/property-category.service";
 import { CreatePropertyCategorySchema, PropertyCategorySchema } from "../../types/model.types";
+import { errorMiddleware } from '../../middlewares/error.middleware';
 
 export const config: ApiRouteConfig = {
     name: 'CreatePropertyCategory',
@@ -13,6 +14,7 @@ export const config: ApiRouteConfig = {
         201: PropertyCategorySchema
     },
     emits: [],
+    middleware: [errorMiddleware],
 };
 
 export const handler: Handlers['CreatePropertyCategory'] = async (req, { logger }) => {

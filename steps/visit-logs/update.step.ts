@@ -2,6 +2,7 @@ import type { ApiRouteConfig, Handlers } from 'motia';
 import VisitLogService from "../../services/visit-log.service";
 import { UpdateVisitLogSchema, VisitLogSchema } from "../../types/model.types";
 import { z } from 'zod';
+import { errorMiddleware } from '../../middlewares/error.middleware';
 
 export const config: ApiRouteConfig = {
     name: 'UpdateVisitLog',
@@ -15,6 +16,7 @@ export const config: ApiRouteConfig = {
         404: z.object({ error: z.string() })
     },
     emits: [],
+    middleware: [errorMiddleware],
 };
 
 export const handler: Handlers['UpdateVisitLog'] = async (req, { logger }) => {

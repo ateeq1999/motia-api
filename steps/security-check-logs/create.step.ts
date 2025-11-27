@@ -1,6 +1,7 @@
 import type { ApiRouteConfig, Handlers } from 'motia';
 import SecurityCheckLogService from "../../services/security-check-log.service";
 import { CreateSecurityCheckLogSchema, SecurityCheckLogSchema } from "../../types/model.types";
+import { errorMiddleware } from '../../middlewares/error.middleware';
 
 export const config: ApiRouteConfig = {
     name: 'CreateSecurityCheckLog',
@@ -13,6 +14,7 @@ export const config: ApiRouteConfig = {
         201: SecurityCheckLogSchema
     },
     emits: [],
+    middleware: [errorMiddleware],
 };
 
 export const handler: Handlers['CreateSecurityCheckLog'] = async (req, { logger }) => {

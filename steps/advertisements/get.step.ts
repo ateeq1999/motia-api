@@ -1,6 +1,7 @@
 import type { ApiRouteConfig, Handlers } from 'motia';
 import AdvertisementService from "../../services/advertisement.service";
-import { AdvertisementSchema } from "../../types/model.types";
+import { errorMiddleware } from '../../middlewares/error.middleware';
+import { UpdateAdvertisementSchema, AdvertisementSchema } from "../../types/model.types";
 import { z } from 'zod';
 
 export const config: ApiRouteConfig = {
@@ -14,6 +15,7 @@ export const config: ApiRouteConfig = {
     404: z.object({ error: z.string() })
   },
   emits: [],
+  middleware: [errorMiddleware],
 };
 
 export const handler: Handlers['GetAdvertisement'] = async (req, { logger }) => {

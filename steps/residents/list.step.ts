@@ -1,6 +1,7 @@
 import type { ApiRouteConfig, Handlers } from 'motia';
 import ResidentService from "../../services/resident.service";
 import { ResidentSchema } from "../../types/model.types";
+import { errorMiddleware } from '../../middlewares/error.middleware';
 import { z } from 'zod';
 
 export const config: ApiRouteConfig = {
@@ -13,6 +14,7 @@ export const config: ApiRouteConfig = {
         200: z.array(ResidentSchema)
     },
     emits: [],
+    middleware: [errorMiddleware],
 };
 
 export const handler: Handlers['ListResidents'] = async (req, { logger }) => {

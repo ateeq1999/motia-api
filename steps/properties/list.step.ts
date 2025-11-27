@@ -1,6 +1,7 @@
 import type { ApiRouteConfig, Handlers } from 'motia';
 import PropertyService from "../../services/property.service";
 import { PropertySchema } from "../../types/model.types";
+import { errorMiddleware } from '../../middlewares/error.middleware';
 import { z } from 'zod';
 
 export const config: ApiRouteConfig = {
@@ -13,6 +14,7 @@ export const config: ApiRouteConfig = {
         200: z.array(PropertySchema)
     },
     emits: [],
+    middleware: [errorMiddleware],
 };
 
 export const handler: Handlers['ListProperties'] = async (req, { logger }) => {

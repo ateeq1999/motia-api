@@ -1,6 +1,7 @@
 import type { ApiRouteConfig, Handlers } from 'motia';
 import VisitLogService from "../../services/visit-log.service";
 import { CreateVisitLogSchema, VisitLogSchema } from "../../types/model.types";
+import { errorMiddleware } from '../../middlewares/error.middleware';
 
 export const config: ApiRouteConfig = {
     name: 'CreateVisitLog',
@@ -13,6 +14,7 @@ export const config: ApiRouteConfig = {
         201: VisitLogSchema
     },
     emits: [],
+    middleware: [errorMiddleware],
 };
 
 export const handler: Handlers['CreateVisitLog'] = async (req, { logger }) => {

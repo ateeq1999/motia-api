@@ -52,3 +52,18 @@ export const errorMiddleware: ApiMiddleware = async (req, ctx, next) => {
         };
     }
 };
+
+
+export const ZodErrorMiddleware: ApiMiddleware = async (req, ctx, next) => {
+    try {
+        return await next()
+    } catch (error: any) {
+        if (error instanceof ZodError) {
+            ctx.logger.error('Validation error', { errors: error.issues })
+            return { status: 400, body: { status: 'fail', message: 'Validation failed', issues: error.issues } }
+        }
+
+        ctx.logger.error('Unexpected error', { error: error.message })
+        return { status: 500, body: { status: 'error', message: 'Internal server error' } }
+    }
+}

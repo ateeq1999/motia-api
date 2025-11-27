@@ -1,6 +1,7 @@
 import type { ApiRouteConfig, Handlers } from 'motia';
 import OfferService from "../../services/offer.service";
 import { CreateOfferSchema, OfferSchema } from "../../types/model.types";
+import { errorMiddleware } from '../../middlewares/error.middleware';
 
 export const config: ApiRouteConfig = {
     name: 'CreateOffer',
@@ -13,6 +14,7 @@ export const config: ApiRouteConfig = {
         201: OfferSchema
     },
     emits: [],
+    middleware: [errorMiddleware],
 };
 
 export const handler: Handlers['CreateOffer'] = async (req, { logger }) => {

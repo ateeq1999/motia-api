@@ -1,5 +1,6 @@
 import type { ApiRouteConfig, Handlers } from 'motia';
 import ProfileService from "../../services/profile.service";
+import { errorMiddleware } from '../../middlewares/error.middleware';
 import { z } from 'zod';
 
 export const config: ApiRouteConfig = {
@@ -12,6 +13,7 @@ export const config: ApiRouteConfig = {
         200: z.object({ success: z.boolean() })
     },
     emits: [],
+    middleware: [errorMiddleware],
 };
 
 export const handler: Handlers['DeleteProfile'] = async (req, { logger }) => {

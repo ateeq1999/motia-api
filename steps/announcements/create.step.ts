@@ -1,6 +1,8 @@
 import type { ApiRouteConfig, Handlers } from 'motia';
 import AnnouncementService from "../../services/announcement.service";
+import { errorMiddleware } from '../../middlewares/error.middleware';
 import { CreateAnnouncementSchema, AnnouncementSchema } from "../../types/model.types";
+import { z } from 'zod';
 
 export const config: ApiRouteConfig = {
   name: 'CreateAnnouncement',
@@ -13,6 +15,7 @@ export const config: ApiRouteConfig = {
     201: AnnouncementSchema
   },
   emits: [],
+  middleware: [errorMiddleware],
 };
 
 export const handler: Handlers['CreateAnnouncement'] = async (req, { logger }) => {
